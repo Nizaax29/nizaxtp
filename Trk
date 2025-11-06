@@ -1,0 +1,18 @@
+-- LocalScript (sous TextButton)
+local button = script.Parent
+local Players = game:GetService("Players")
+
+-- Coordonnées de la "base" (modifier selon ta map)
+local baseCFrame = CFrame.new(100, 10, -50)  -- exemple : x=100, y=10, z=-50
+
+button.Text = "Aller à la base"
+button.MouseButton1Click:Connect(function()
+    local player = Players.LocalPlayer
+    if not player then return end
+    local character = player.Character or player.CharacterAdded:Wait()
+    local hrp = character:FindFirstChild("HumanoidRootPart")
+    if hrp then
+        -- Téléportation (côté client)
+        hrp.CFrame = baseCFrame
+    end
+end)
